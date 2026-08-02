@@ -1,0 +1,18 @@
+# Node dependencies
+node_modules
+
+# Compiled build output — run `npm run build` to regenerate
+content-analytics/assets/build/
+
+# macOS metadata
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHP Composer (not used, but guard against accidental additions)
+vendor/
+composer.lock
