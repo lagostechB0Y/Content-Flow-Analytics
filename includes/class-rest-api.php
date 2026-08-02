@@ -107,12 +107,15 @@ class CFA_REST_API {
 	public static function handle_track( WP_REST_Request $request ) {
 		global $wpdb;
 
-		if ( ! self::check_rate_limit() ) {
-			return new WP_Error(
-				'cfa_rate_limited',
-				__( 'Too many requests. Please try again later.', 'content-flow-analytics' ),
-				array( 'status' => 429 )
-			);
+		// Skip rate limiting in development/testing environments
+		if ( ! defined( 'CFA_DISABLE_RATE_LIMIT' ) && ! WP_DEBUG ) {
+			if ( ! self::check_rate_limit() ) {
+				return new WP_Error(
+					'cfa_rate_limited',
+					__( 'Too many requests. Please try again later.', 'content-flow-analytics' ),
+					array( 'status' => 429 )
+				);
+			}
 		}
 
 		$post_id      = $request->get_param( 'post_id' );

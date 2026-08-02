@@ -30,15 +30,22 @@ class CFA_Enqueue {
 	 * @return void
 	 */
 	public static function enqueue_frontend() {
+		error_log( '[CFA] enqueue_frontend called. is_singular: ' . ( is_singular() ? 'true' : 'false' ) );
+		
 		if ( ! is_singular() ) {
+			error_log( '[CFA] Not singular, returning' );
 			return;
 		}
 
 		$post_id = get_the_ID();
+		error_log( '[CFA] Post ID: ' . $post_id );
+		
 		if ( ! $post_id ) {
+			error_log( '[CFA] No post ID, returning' );
 			return;
 		}
 
+		error_log( '[CFA] Enqueueing tracker script' );
 		wp_enqueue_script(
 			'cfa-tracker',
 			CFA_PLUGIN_URL . 'assets/js/tracker.js',
