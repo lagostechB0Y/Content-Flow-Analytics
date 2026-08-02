@@ -265,8 +265,8 @@ class CFA_REST_API {
 	 * @return bool
 	 */
 	private static function check_rate_limit(): bool {
-		\$ip  = isset( \$_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( \$_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
-		\$key = 'cfa_rl_' . md5( \$ip );
+		$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+		$key = 'cfa_rl_' . md5( $ip );
 
 		$count = (int) get_transient( $key );
 		if ( $count >= 30 ) {
